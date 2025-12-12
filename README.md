@@ -414,6 +414,26 @@ This flow retrieves customers filtered by their status (ACTIVE or INACTIVE).
 
 **Testing:**
 
+```
+GET /api/customers/search?keyword=john
+```
+
+<img width="507" height="528" alt="image" src="https://github.com/user-attachments/assets/0ce801aa-d8e1-4706-9225-bc72e3ceabba" />
+
+```
+GET /api/customers/status/ACTIVE
+```
+
+<img width="508" height="459" alt="image" src="https://github.com/user-attachments/assets/202e4b04-3d5a-45b1-8896-5320730e6c7f" />
+
+<img width="508" height="546" alt="image" src="https://github.com/user-attachments/assets/4a3bb58a-f5f5-4d60-8c0a-47ce5f9a8ced" />
+
+```
+GET /api/customers/status/INACTIVE
+```
+
+<img width="507" height="343" alt="image" src="https://github.com/user-attachments/assets/02584ef0-9c4d-424e-9b19-35104aa659d0" />
+
 ### 11. Pagination and Sorting Flow
 This flow retrieves customers with pagination and optional sorting support.
 
@@ -438,7 +458,53 @@ This flow retrieves customers with pagination and optional sorting support.
    * `totalPages` - Total number of pages.
 8. **Response**: Returns `200 OK` with paginated response object.
 
-**Testing (Basic Pagination):**
+**Testing:**
+
+```
+GET /api/customers?page=0&size=5
+```
+
+<img width="508" height="606" alt="image" src="https://github.com/user-attachments/assets/7191fd3a-2e97-4345-b4ce-80d1a180d50d" />
+
+<img width="509" height="518" alt="image" src="https://github.com/user-attachments/assets/757871cc-32ac-4387-9c1d-5d9f6dea0abb" />
+
+<img width="508" height="68" alt="image" src="https://github.com/user-attachments/assets/e2f33a46-3b6e-41a2-8389-a92a51f2c24d" />
+
+```
+GET /api/customers?page=1&size=10
+```
+
+<img width="508" height="224" alt="image" src="https://github.com/user-attachments/assets/2492c047-0098-4285-9a48-47c9f5ed8d07" />
+
+```
+GET /api/customers?sortBy=fullName&sortDir=asc
+```
+
+<img width="508" height="608" alt="image" src="https://github.com/user-attachments/assets/d9f6be5f-7c6c-480a-a665-215fc7a1cc65" />
+
+<img width="508" height="474" alt="image" src="https://github.com/user-attachments/assets/945c7565-b248-47c4-9226-161ed6ceef1e" />
+
+<img width="509" height="110" alt="image" src="https://github.com/user-attachments/assets/18bdc69a-11be-4633-aaca-93637c81776b" />
+
+```
+GET /api/customers?sortBy=createdAt&sortDir=desc
+```
+
+<img width="508" height="607" alt="image" src="https://github.com/user-attachments/assets/f772e2c8-427f-4472-aee8-68f15dca5bae" />
+
+<img width="509" height="478" alt="image" src="https://github.com/user-attachments/assets/ed89d17f-0170-4149-b294-c90c5430c876" />
+
+<img width="510" height="112" alt="image" src="https://github.com/user-attachments/assets/e6a405fb-ba2d-4d5a-b96f-8dde5678bf86" />
+
+```
+GET /api/customers?page=0&size=5&sortBy=fullName&sortDir=asc
+```
+
+<img width="508" height="613" alt="image" src="https://github.com/user-attachments/assets/121dfe72-13cf-4122-b17b-c746c611e476" />
+
+<img width="508" height="476" alt="image" src="https://github.com/user-attachments/assets/042e581a-0a4f-45c2-b570-3cda5cfde4d4" />
+
+<img width="508" height="117" alt="image" src="https://github.com/user-attachments/assets/2afc100b-a81b-4945-a591-62f24894350c" />
 
 ### 12. PATCH Partial Update Customer Flow
 This flow partially updates a customer's information, only modifying the fields provided in the request.
@@ -469,7 +535,29 @@ This flow partially updates a customer's information, only modifying the fields 
 * **PUT** requires all fields and replaces the entire resource.
 * **PATCH** only updates the fields provided in the request body.
 
-**Testing (Update Single Field):**
+**Testing:**
+
+```
+PUT /api/customers/1
+{
+    "customerCode": "C001",
+    "fullName": "John Updated",
+    "email": "john.updated@example.com",
+    "phone": "+1-555-9999",
+    "address": "New Address"
+}
+```
+
+<img width="507" height="311" alt="image" src="https://github.com/user-attachments/assets/e7b14b3c-52bc-4d01-8993-ea1f37480723" />
+
+```
+PATCH /api/customers/1
+{
+    "fullName": "John Partially Updated"
+}
+```
+
+<img width="508" height="313" alt="image" src="https://github.com/user-attachments/assets/ebcf4349-8f40-4f47-93df-d1ee52f6ba20" />
 
 ### 13. Advanced Search Flow
 This flow searches for customers using multiple optional criteria simultaneously.
@@ -489,8 +577,6 @@ This flow searches for customers using multiple optional criteria simultaneously
    * Performs case-insensitive partial matching for name and email.
 6. **DTO Conversion**: Each matching `Customer` entity is converted to `CustomerResponseDTO`.
 7. **Response**: Returns `200 OK` with an array of matching customers.
-
-**Testing (Search by Name Only):**
 
 ## Architecture Components
 
