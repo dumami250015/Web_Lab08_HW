@@ -1,4 +1,4 @@
-# LAB 08 PRACTICE REPORT - Customer REST API
+# LAB 08 HOMEWORK REPORT - Customer REST API
 
 ## Student Information
 - **Name:** Võ Trí Khôi
